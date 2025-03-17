@@ -1,4 +1,4 @@
-package com.kncnks.electronics_store.service;
+package com.kncnks.electronic_store.service;
 import com.kncnks.electronic_store.model.Product;
 import org.springframework.data.domain.Page;
 

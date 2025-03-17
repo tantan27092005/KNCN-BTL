@@ -1,9 +1,8 @@
-package com.kncnks.electronics_store.dto;
+package com.kncnks.electronic_store.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-// DTO sử dụng record (Java 16+)
 public record ProductDTO(
         String id,
         String title,

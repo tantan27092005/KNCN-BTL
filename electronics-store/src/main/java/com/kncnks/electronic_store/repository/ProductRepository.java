@@ -1,4 +1,4 @@
-package com.kncnks.electronics_store.repository;
+package com.kncnks.electronic_store.repository;
 
 import com.kncnks.electronic_store.model.Product;
 import org.springframework.data.domain.Page;
@@ -9,8 +9,6 @@ import org.springframework.data.mongodb.repository.Query;
 import java.math.BigDecimal;
 
 public interface ProductRepository extends MongoRepository<Product, String> {
-
-    // Text blocks (Java 15+) cho query phức tạp
     @Query("""
         {'category': ?0, 
          $and: [

@@ -1,10 +1,9 @@
-package com.kncnks.electronics_store.service;
+package com.kncnks.electronic_store.service;
 
 import com.kncnks.electronic_store.model.Product;
-import com.kncnks.electronics_store.repository.Pr   oductRepository;
+import com.kncnks.electronic_store.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -23,10 +22,10 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> getAllProducts(String keyword, int page, int limit) {
         var pageable = PageRequest.of(page - 1, limit);
 
-        // Pattern matching with switch (Java 21)
         return switch (keyword) {
-            case null, "" -> productRepository.findAll(pageable);
-            default -> productRepository.findByKeyword(keyword, pageable);
+            case null -> productRepository.findAll(pageable);   // Khi keyword là null
+            case "" -> productRepository.findAll(pageable);     // Khi keyword là chuỗi rỗng
+            default -> productRepository.findByKeyword(keyword, pageable); // Các trường hợp khác
         };
     }
 
@@ -45,39 +44,36 @@ public class ProductServiceImpl implements ProductService {
             int limit) {
 
         var pageable = PageRequest.of(page - 1, limit);
-
-        // Text blocks (Java 15+) và string templates (Java 21 preview)
         String brandFilter = brand != null && !brand.isEmpty() ?
-                STR."""{"brand": "\{brand}"}""" : "{}";
+                "{\"brand\": \"" + brand + "\"}" : "{}";
 
         String ramFilter = ram != null ?
-                STR."""{"ram": \{ram}}""" : "{}";
+                "{\"ram\": " + ram + "}" : "{}";
 
         String typeFilter = type != null && !type.isEmpty() ?
-                STR."""{"type": "\{type}"}""" : "{}";
+                "{\"type\": \"" + type + "\"}" : "{}";
 
         String screenFilter = screen != null ?
-                STR."""{"screen": \{screen}}""" : "{}";
+                "{\"screen\": " + screen + "}" : "{}";
 
         String storageFilter = storage != null ?
-                STR."""{"storage": \{storage}}""" : "{}";
+                "{\"storage\": " + storage + "}" : "{}";
 
         String chargerFilter = charger != null ?
-                STR."""{"charger": \{charger}}""" : "{}";
+                "{\"charger\": " + charger + "}" : "{}";
 
-        // Xử lý khoảng giá
         String priceFilter = "{}";
         if (price != null) {
-            priceFilter = STR."""{"price": \{price}}""";
+            priceFilter = "{\"price\": " + price + "}";
         } else if (priceRange != null && !priceRange.isEmpty()) {
             var range = priceRange.split("-");
             if (range.length == 2) {
                 try {
                     var min = new BigDecimal(range[0]);
                     var max = new BigDecimal(range[1]);
-                    priceFilter = STR."""{"price": {"$gte": \{min}, "$lte": \{max}}}""";
+                    priceFilter = "{\"price\": {\"$gte\": " + min + ", \"$lte\": " + max + "}}";
                 } catch (NumberFormatException e) {
-                    // Định dạng khoảng giá không hợp lệ, sử dụng mặc định
+                    throw new IllegalArgumentException("Invalid price range format: " + priceRange, e);
                 }
             }
         }
