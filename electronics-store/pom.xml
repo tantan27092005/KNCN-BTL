@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.kncnks</groupId>
-	<artifactId>electronics-store</artifactId>
+	<artifactId>electronic-store</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>electronics-store</name>
 	<description>Electronics E-commerce Website</description>
