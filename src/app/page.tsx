@@ -10,19 +10,17 @@ export default async function Home() {
     let dataLaptopRandom: any[] = [];
 
     try {
-        // Fetch phone products (Flash Sale)
-        dataFlashSaleRandom = await fetchPhoneProducts({ searchParams: { limit: 10 } }) || [];
-        console.log('Fetched phone products for Flash Sale:', dataFlashSaleRandom);
+        dataFlashSaleRandom = await fetchPhoneProducts({ searchParams: { limit: 10 } });
+        console.log('Fetched Flash Sale data:', dataFlashSaleRandom);
     } catch (error) {
-        console.error('Error fetching Flash Sale products:', error.message);
+        console.error('Error fetching Flash Sale data:', error.message);
     }
 
     try {
-        // Fetch laptop products (Promotions)
-        dataLaptopRandom = await fetchLaptopProducts({ searchParams: { limit: 10 } }) || [];
-        console.log('Fetched laptop products for Promotions:', dataLaptopRandom);
+        dataLaptopRandom = await fetchLaptopProducts({ searchParams: { limit: 10 } });
+        console.log('Fetched Laptop Promotion data:', dataLaptopRandom);
     } catch (error) {
-        console.error('Error fetching Laptop products:', error.message);
+        console.error('Error fetching Laptop Promotion data:', error.message);
     }
 
     return (
