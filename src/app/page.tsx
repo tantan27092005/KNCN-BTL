@@ -8,6 +8,7 @@ import { fetchLaptopProducts, fetchPhoneProducts } from '@/api';
 export default async function Home() {
     const dataFlashSaleRandom = await fetchPhoneProducts({}) || [];
     const dataLaptopRandom = await fetchLaptopProducts({});
+
     return (
         <main className="bg-[#f3efef] space-y-[30px]">
             <section className="padding max-lg:hidden">
