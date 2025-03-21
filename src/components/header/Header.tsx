@@ -18,10 +18,13 @@ function Header() {
             <header className="w-full ">
                 <img src={banner.src} alt="banner" className="w-full" />
             </header>
-            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent fixed">
-                <Nav dataPlaces= {dataPlaces}/>
+            {/* Phần Nav cố định khi cuộn trang */}
+            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent fixed top-0 left-0 right-0 z-50">
+                <Nav dataPlaces={dataPlaces} />
             </nav>
-            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent fixed">
+
+            {/* Phần MenuBar cố định khi cuộn trang */}
+            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent fixed top-[60px] left-0 right-0 z-40">
                 <MenuBar menuBar={menuBar} />
             </nav>
         </div>
