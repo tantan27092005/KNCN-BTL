@@ -52,7 +52,7 @@ interface FetchProductDetailProps {
     _id: string;
 }
 
-// Helper function to log errors
+// Helper for logging response errors
 const logResponseError = async (res: Response) => {
     const { status, statusText, url } = res;
     console.error(`HTTP Error: ${status} ${statusText} for ${url}`);
@@ -71,7 +71,7 @@ const cleanParams = (params: any) => {
         .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 };
 
-// Generic fetch function with timeout handling
+// Fetch function with timeout handling
 const fetchWithTimeout = async (url: string, options: any, timeout: number = 10000) => {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
@@ -111,7 +111,7 @@ const fetchProductsByCategory = async (category: string = '', searchParams?: Sea
     }
 };
 
-// Fetch functions for products and details
+// Fetch functions
 export const fetchProducts = async (props: FetchProductsProps): Promise<Product[]> =>
     fetchProductsByCategory('', props?.searchParams);
 
