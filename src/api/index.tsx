@@ -23,7 +23,6 @@ interface FetchProductDetailProps {
     _id: string;
 }
 
-// Fetch all products
 export const fetchProducts = async (props: FetchProductsProps) => {
     try {
         const { keyword = '' } = props?.searchParams || {};
@@ -34,6 +33,7 @@ export const fetchProducts = async (props: FetchProductsProps) => {
             }
         );
         if (!res.ok) {
+            console.error('API Response Status:', res.status);
             throw new Error('Failed to fetch products');
         }
         const products = await res.json();
@@ -44,7 +44,6 @@ export const fetchProducts = async (props: FetchProductsProps) => {
     }
 };
 
-// Fetch phone products
 export const fetchPhoneProducts = async (props: FetchProductsProps) => {
     try {
         const {
@@ -67,6 +66,7 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
             }
         );
         if (!res.ok) {
+            console.error('API Response Status:', res.status);
             throw new Error('Failed to fetch phone products');
         }
         const data = await res.json();
@@ -77,7 +77,6 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
     }
 };
 
-// Fetch laptop products
 export const fetchLaptopProducts = async (props: FetchProductsProps) => {
     try {
         const {
@@ -100,6 +99,7 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
             }
         );
         if (!res.ok) {
+            console.error('API Response Status:', res.status);
             throw new Error('Failed to fetch laptop products');
         }
         const data = await res.json();
@@ -110,7 +110,6 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
     }
 };
 
-// Fetch product details
 export const fetchProductDetail = async (_id: FetchProductDetailProps) => {
     try {
         const res = await fetch(
@@ -120,9 +119,10 @@ export const fetchProductDetail = async (_id: FetchProductDetailProps) => {
             }
         );
         if (!res.ok) {
+            console.error('API Response Status:', res.status);
             throw new Error('Failed to fetch product details');
         }
-        const data = await res.json() || [];
+        const data = await res.json();
         return data;
     } catch (error) {
         console.error('Error fetching product details:', error.message);
