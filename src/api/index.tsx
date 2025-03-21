@@ -31,7 +31,10 @@ export const fetchProducts = async (props: FetchProductsProps) => {
         console.log('Fetching URL:', url); // Log URL để kiểm tra
 
         const res = await fetch(url, {
-            next: { revalidate: 60 },
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!res.ok) {
@@ -41,6 +44,7 @@ export const fetchProducts = async (props: FetchProductsProps) => {
         }
 
         const products = await res.json();
+        console.log('Fetched products:', products); // Log dữ liệu trả về
         return products;
     } catch (error) {
         console.error('Error in fetchProducts:', error); // Log lỗi chi tiết
@@ -67,7 +71,10 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
         console.log('Fetching URL:', url); // Log URL để kiểm tra
 
         const res = await fetch(url, {
-            next: { revalidate: 60 },
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!res.ok) {
@@ -77,6 +84,7 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
         }
 
         const data = await res.json();
+        console.log('Fetched phone products:', data); // Log dữ liệu trả về
         return data;
     } catch (error) {
         console.error('Error in fetchPhoneProducts:', error); // Log lỗi chi tiết
@@ -103,7 +111,10 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
         console.log('Fetching URL:', url); // Log URL để kiểm tra
 
         const res = await fetch(url, {
-            next: { revalidate: 60 },
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!res.ok) {
@@ -113,6 +124,7 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
         }
 
         const data = await res.json();
+        console.log('Fetched laptop products:', data); // Log dữ liệu trả về
         return data;
     } catch (error) {
         console.error('Error in fetchLaptopProducts:', error); // Log lỗi chi tiết
@@ -126,7 +138,10 @@ export const fetchProductDetail = async (_id: FetchProductDetailProps) => {
         console.log('Fetching URL:', url); // Log URL để kiểm tra
 
         const res = await fetch(url, {
-            next: { revalidate: 60 },
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
 
         if (!res.ok) {
@@ -136,6 +151,7 @@ export const fetchProductDetail = async (_id: FetchProductDetailProps) => {
         }
 
         const data = await res.json();
+        console.log('Fetched product detail:', data); // Log dữ liệu trả về
         return data;
     } catch (error) {
         console.error('Error in fetchProductDetail:', error); // Log lỗi chi tiết
