@@ -10,7 +10,7 @@ function MenuBar({ menuBar }) {
                 {menuBar.map((menu) => (
                    <div className="relative group" key={menu.id}>
                    <Link href={menu.link}>
-                       <div className="center space-x-3">
+                       <div className="center space-x-3 text-white">
                            <FontAwesomeIcon icon={menu.icon} />
                            <div>{menu.title}</div>
                            {menu.completed && <FontAwesomeIcon icon={faSortDown} />}
