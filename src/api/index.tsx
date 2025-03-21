@@ -23,28 +23,27 @@ interface FetchProductDetailProps {
     _id: string;
 }
 
-// Fetch all products
 export const fetchProducts = async (props: FetchProductsProps) => {
     try {
         const { keyword = '' } = props?.searchParams || {};
 
         const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/products?keyword=${keyword}`, 
+            `https://tgdd-nodejs-thu.vercel.app/products?keyword=${keyword}`,
             {
                 next: { revalidate: 60 },
-            });
+            }
+        );
         if (!res.ok) {
             throw new Error('Failed to fetch products');
         }
         const products = await res.json();
         return products;
     } catch (error) {
-        console.error('Error fetching products:', error.message);
+        console.error(error);
         return [];
     }
 };
 
-// Fetch phone products
 export const fetchPhoneProducts = async (props: FetchProductsProps) => {
     try {
         const {
@@ -61,22 +60,22 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
         } = props?.searchParams || {};
 
         const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/products?category=phone&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`, 
+            `https://tgdd-nodejs-thu.vercel.app/products?category=phone&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`,
             {
                 next: { revalidate: 60 },
-            });
+            }
+        );
         if (!res.ok) {
-            throw new Error('Failed to fetch phone products');
+            throw new Error('Failed to fetch products');
         }
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error fetching phone products:', error.message);
+        console.error(error);
         return [];
     }
 };
 
-// Fetch laptop products
 export const fetchLaptopProducts = async (props: FetchProductsProps) => {
     try {
         const {
@@ -93,36 +92,34 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
         } = props?.searchParams || {};
 
         const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/products?category=laptop&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`,
+            `https://tgdd-nodejs-thu.vercel.app/products?category=laptop&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`,
             {
                 next: { revalidate: 60 },
-            });
+            }
+        );
         if (!res.ok) {
-            throw new Error('Failed to fetch laptop products');
+            throw new Error('Failed to fetch products');
         }
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error('Error fetching laptop products:', error.message);
+        console.error(error);
         return [];
     }
 };
 
-// Fetch product detail
-export const fetchProductDetail = async (props: FetchProductDetailProps) => {
+export const fetchProductDetail = async (_id: FetchProductDetailProps) => {
     try {
-        const { _id } = props;
-
-        const res = await fetch(`${process.env.NEXT_DOMAIN_URL}/products/${_id}`, {
+        const res = await fetch(`https://tgdd-nodejs-thu.vercel.app/products/${_id}`, {
             next: { revalidate: 60 },
         });
         if (!res.ok) {
-            throw new Error('Failed to fetch product detail');
+            throw new Error('Failed to fetch product');
         }
-        const data = await res.json();
-        return data; 
+        const data = await res.json() || [];
+        return data;
     } catch (error) {
-        console.error('Error fetching product detail:', error.message);
-        return null; 
+        console.error('Error fetching product detail:', error);
+        return null;
     }
 };
