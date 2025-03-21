@@ -74,7 +74,7 @@ const cleanParams = (params: any) => {
 // Generalized fetch function for products
 const fetchProductsByCategory = async (category: string = '', searchParams?: SearchParams): Promise<Product[]> => {
     try {
-        const queryParams = new URLSearchParams(cleanParams(searchParams)).toString();
+        const queryParams = new URLSearchParams(cleanParams(searchParams || {})).toString();
         const NEXT_DOMAIN_URL = process.env.NEXT_DOMAIN_URL;
 
         if (!NEXT_DOMAIN_URL) {
@@ -82,21 +82,23 @@ const fetchProductsByCategory = async (category: string = '', searchParams?: Sea
         }
 
         const url = `${NEXT_DOMAIN_URL}/products${category ? `?category=${category}` : ''}&${queryParams}`;
-        console.log('Fetching:', url);
+        console.log('Calling API:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
 
         if (!res.ok) {
+            console.error(`Failed to fetch. Status: ${res.status}, Text: ${res.statusText}`);
             await logResponseError(res);
             throw new Error(`Failed to fetch products for category: ${category || 'all'}`);
         }
 
         return await res.json();
     } catch (err) {
-        console.error(`Error fetching products (${category || 'all'}):`, err.message);
+        console.error(`Error in fetchProductsByCategory (${category || 'all'}):`, err.message);
         return [];
     }
 };
+
 
 // Specific functions using the generalized fetcher
 export const fetchProducts = async (props: FetchProductsProps): Promise<Product[]> =>
