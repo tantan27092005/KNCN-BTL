@@ -1,43 +1,23 @@
-import Banner from '@/components/home-sections/Banner/Banner';
-import CateFuture from '@/components/home-sections/CateFuture/CateFuture';
-import Promo from '@/components/home-sections/Promo';
-import FlashSaleDeals from '@/components/home-sections/Deals/FlashSaleDeals';
-import PromotionDeals from '@/components/home-sections/Deals/PromotionDeals';
-import { fetchLaptopProducts, fetchPhoneProducts } from '@/api';
+import { fetchProducts } from '@/api';
 
 export default async function Home() {
-    let dataFlashSaleRandom: any[] = [];
-    let dataLaptopRandom: any[] = [];
+    let products = [];
 
     try {
-        dataFlashSaleRandom = await fetchPhoneProducts({}) || [];
-    } catch (err) {
-        console.error('Error fetching Flash Sale products:', err.message);
-    }
-
-    try {
-        dataLaptopRandom = await fetchLaptopProducts({}) || [];
-    } catch (err) {
-        console.error('Error fetching Laptop products:', err.message);
+        products = await fetchProducts({});
+        console.log('Fetched products:', products);
+    } catch (error) {
+        console.error('Error fetching products in Home:', error.message);
     }
 
     return (
-        <main className="bg-[#f3efef] space-y-[30px]">
-            <section className="padding max-lg:hidden">
-                <Banner />
-            </section>
-            <section className="padding">
-                <FlashSaleDeals dataFlashSaleRandom={dataFlashSaleRandom} />
-            </section>
-            <section className="padding">
-                <PromotionDeals dataLaptopRandom={dataLaptopRandom} />
-            </section>
-            <section className="padding max-lg:hidden">
-                <CateFuture />
-            </section>
-            <section className="padding">
-                <Promo />
-            </section>
+        <main>
+            <h1>Product List</h1>
+            {products.length > 0 ? (
+                products.map(product => <div key={product._id}>{product.title}</div>)
+            ) : (
+                <p>No products available.</p>
+            )}
         </main>
     );
 }
