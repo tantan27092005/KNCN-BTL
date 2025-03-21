@@ -25,11 +25,11 @@ interface FetchProductDetailProps {
 
 // Helper function to log error details
 const logErrorDetails = async (res: Response) => {
-    console.error('API Response Status:', res.status); // Log HTTP status code
-    console.error('API Response Headers:', JSON.stringify([...res.headers])); // Log headers
+    console.error('API Response Status:', res.status);
+    console.error('API Response Headers:', JSON.stringify([...res.headers]));
     try {
         const bodyText = await res.text();
-        console.error('API Response Body:', bodyText); // Log response body
+        console.error('API Response Body:', bodyText);
     } catch (error) {
         console.error('Error parsing response body:', error.message);
     }
@@ -40,19 +40,19 @@ export const fetchProducts = async (props: FetchProductsProps) => {
     try {
         const { keyword = '' } = props?.searchParams || {};
         const url = `${process.env.NEXT_DOMAIN_URL}/products?keyword=${keyword}`;
-        console.log('Calling API:', url); // Log URL being called
+        console.log('Calling API:', url);
 
         const res = await fetch(url, {
             next: { revalidate: 60 },
         });
 
         if (!res.ok) {
-            await logErrorDetails(res); // Log detailed error info
+            await logErrorDetails(res);
             throw new Error('Failed to fetch products');
         }
 
         const products = await res.json();
-        console.log('Products fetched successfully:', products); // Log successful response
+        console.log('Products fetched successfully:', products);
         return products;
     } catch (error) {
         console.error('Error fetching products:', error.message);
@@ -77,14 +77,14 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
         } = props?.searchParams || {};
 
         const url = `${process.env.NEXT_DOMAIN_URL}/products?category=phone&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`;
-        console.log('Calling API:', url); // Log URL being called
+        console.log('Calling API:', url);
 
         const res = await fetch(url, {
             next: { revalidate: 60 },
         });
 
         if (!res.ok) {
-            await logErrorDetails(res); // Log detailed error info
+            await logErrorDetails(res);
             throw new Error('Failed to fetch phone products');
         }
 
@@ -114,14 +114,14 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
         } = props?.searchParams || {};
 
         const url = `${process.env.NEXT_DOMAIN_URL}/products?category=laptop&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`;
-        console.log('Calling API:', url); // Log URL being called
+        console.log('Calling API:', url);
 
         const res = await fetch(url, {
             next: { revalidate: 60 },
         });
 
         if (!res.ok) {
-            await logErrorDetails(res); // Log detailed error info
+            await logErrorDetails(res);
             throw new Error('Failed to fetch laptop products');
         }
 
@@ -139,14 +139,14 @@ export const fetchProductDetail = async (props: FetchProductDetailProps) => {
     try {
         const { _id } = props;
         const url = `${process.env.NEXT_DOMAIN_URL}/products/${_id}`;
-        console.log('Calling API:', url); // Log URL being called
+        console.log('Calling API:', url);
 
         const res = await fetch(url, {
             next: { revalidate: 60 },
         });
 
         if (!res.ok) {
-            await logErrorDetails(res); // Log detailed error info
+            await logErrorDetails(res);
             throw new Error('Failed to fetch product details');
         }
 
