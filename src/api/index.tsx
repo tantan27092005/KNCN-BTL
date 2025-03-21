@@ -1,4 +1,5 @@
 'use server';
+
 interface SearchParams {
     category?: string;
     brand?: string;
@@ -11,7 +12,7 @@ interface SearchParams {
     pricerange?: number;
     page?: number;
     limit?: number;
-    keyword?:string,
+    keyword?: string;
 }
 
 interface FetchProductsProps {
@@ -21,33 +22,34 @@ interface FetchProductsProps {
 interface FetchProductDetailProps {
     _id: string;
 }
+
+// Fetch all products
 export const fetchProducts = async (props: FetchProductsProps) => {
     try {
-        const {
-            keyword='',
-        } = props?.searchParams || {};
-
+        const { keyword = '' } = props?.searchParams || {};
         const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/posts?keyword=${keyword}`, 
+            `${process.env.NEXT_DOMAIN_URL}/products?keyword=${keyword}`, 
             {
                 next: { revalidate: 60 },
-            });
+            }
+        );
         if (!res.ok) {
             throw new Error('Failed to fetch products');
         }
         const products = await res.json();
         return products;
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching products:', error.message);
         return [];
     }
 };
 
+// Fetch phone products
 export const fetchPhoneProducts = async (props: FetchProductsProps) => {
     try {
         const {
             brand = '',
-            pricerange='',
+            pricerange = '',
             ram = '',
             type = '',
             screen = '',
@@ -59,25 +61,28 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
         } = props?.searchParams || {};
 
         const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/posts?category=phone&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`, 
+            `${process.env.NEXT_DOMAIN_URL}/products?category=phone&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`, 
             {
                 next: { revalidate: 60 },
-            });
+            }
+        );
         if (!res.ok) {
-            throw new Error('Failed to fetch products');
+            throw new Error('Failed to fetch phone products');
         }
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching phone products:', error.message);
         return [];
     }
 };
+
+// Fetch laptop products
 export const fetchLaptopProducts = async (props: FetchProductsProps) => {
     try {
         const {
             brand = '',
-            pricerange='',
+            pricerange = '',
             ram = '',
             type = '',
             screen = '',
@@ -89,35 +94,38 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
         } = props?.searchParams || {};
 
         const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/posts?category=laptop&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`,
-            
+            `${process.env.NEXT_DOMAIN_URL}/products?category=laptop&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`, 
             {
                 next: { revalidate: 60 },
-            });
+            }
+        );
         if (!res.ok) {
-            throw new Error('Failed to fetch products');
+            throw new Error('Failed to fetch laptop products');
         }
         const data = await res.json();
         return data;
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching laptop products:', error.message);
         return [];
     }
 };
 
+// Fetch product details
 export const fetchProductDetail = async (_id: FetchProductDetailProps) => {
     try {
-        const res = await fetch(`${process.env.NEXT_DOMAIN_URL}/posts/${_id}`, {
-            next: { revalidate: 60 },
-        });
+        const res = await fetch(
+            `${process.env.NEXT_DOMAIN_URL}/products/${_id}`, 
+            {
+                next: { revalidate: 60 },
+            }
+        );
         if (!res.ok) {
-            throw new Error('Failed to fetch product');
+            throw new Error('Failed to fetch product details');
         }
         const data = await res.json() || [];
-        return data; 
+        return data;
     } catch (error) {
-        console.error('Error fetching product detail:', error);
-        return null; 
+        console.error('Error fetching product details:', error.message);
+        return null;
     }
-}
-
+};
