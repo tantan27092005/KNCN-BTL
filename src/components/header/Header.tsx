@@ -20,6 +20,8 @@ function Header() {
             </header>
             <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
                 <Nav dataPlaces= {dataPlaces}/>
+            </nav>
+            <nav className="padding bg-[#FFE8B9] w-full max-xl:bg-transparent">
                 <MenuBar menuBar={menuBar} />
             </nav>
         </div>
