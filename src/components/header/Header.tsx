@@ -11,6 +11,7 @@ function Header() {
 
     return (
         <div className="">
+
             {/* Phần NavAdmin (ẩn trên mobile) */}
             <div className="max-xl:hidden">
                 <NavAdmin />
@@ -21,18 +22,24 @@ function Header() {
                 <img src={banner.src} alt="banner" className="w-full" />
             </header>
 
-            {/* Phần Nav cố định khi cuộn trang */}
-            <div className="sticky top-0 z-50 bg-[#2A83E9]">
-                <nav className="padding w-full max-xl:bg-transparent">
+            {/* Phần Nav cố định ở đầu trang */}
+            <div className="fixed top-0 left-0 z-50 bg-[#2A83E9] w-full">
+                <nav className="padding w-full">
                     <Nav dataPlaces={dataPlaces} />
                 </nav>
             </div>
 
-            {/* Phần MenuBar cố định khi cuộn trang */}
-            <div className="sticky top-[60px] z-40 bg-[#2A83E9]">
-                <nav className="padding w-full max-xl:bg-transparent">
+            {/* Phần MenuBar cố định ngay dưới Nav */}
+            <div className="fixed top-[60px] left-0 z-40 bg-[#2A83E9] w-full">
+                <nav className="padding w-full">
                     <MenuBar menuBar={menuBar} />
                 </nav>
+            </div>
+
+            {/* Nội dung khác của trang */}
+            <div className="pt-[120px]">
+                <p>Đây là nội dung của trang nằm dưới Nav và MenuBar.</p>
+                <p>Cuộn trang để kiểm tra hành vi cố định.</p>
             </div>
         </div>
     );
