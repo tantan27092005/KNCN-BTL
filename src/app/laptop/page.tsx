@@ -23,21 +23,12 @@ interface LaptopPageProps {
 }
 
 const LaptopPage = async ({ searchParams }: LaptopPageProps) => {
-    try {
-        const products = await fetchLaptopProducts({ searchParams });
-        return (
-            <div>
-                {products && products.length > 0 ? (
-                    <ProductsPage products={products} filterData={filterDataLaptop} />
-                ) : (
-                    <div>Không có sản phẩm nào được tìm thấy.</div>
-                )}
-            </div>
-        );
-    } catch (error) {
-        console.error('Error fetching laptop products:', error.message);
-        return <div>Đã xảy ra lỗi khi tải dữ liệu. Vui lòng thử lại sau.</div>;
-    }
+    const products = await fetchLaptopProducts({ searchParams });
+    return (
+        <div>
+            <ProductsPage products={products} filterData={filterDataLaptop} />
+        </div>
+    );
 };
 
 export default LaptopPage;
