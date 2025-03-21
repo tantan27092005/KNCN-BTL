@@ -35,7 +35,7 @@ const LaptopPage = async ({ searchParams }: LaptopPageProps) => {
             </div>
         );
     } catch (error) {
-        console.error('Error loading laptop products:', error);
+        console.error('Error fetching laptop products:', error.message);
         return <div>Đã xảy ra lỗi khi tải dữ liệu. Vui lòng thử lại sau.</div>;
     }
 };
