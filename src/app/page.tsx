@@ -14,7 +14,12 @@ export default async function Home() {
         <main>
             <h1>Product List</h1>
             {products.length > 0 ? (
-                products.map(product => <div key={product._id}>{product.title}</div>)
+                products.map((product, index) => (
+                    <div key={index}>
+                        <h2>{product.title}</h2>
+                        <p>{product.desc}</p>
+                    </div>
+                ))
             ) : (
                 <p>No products available.</p>
             )}
