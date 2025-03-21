@@ -39,14 +39,12 @@ const logErrorDetails = async (res: Response) => {
 export const fetchProducts = async (props: FetchProductsProps) => {
     try {
         const { keyword = '' } = props?.searchParams || {};
-        console.log('Calling API:', `${process.env.NEXT_DOMAIN_URL}/products?keyword=${keyword}`); // Log URL being called
+        const url = `${process.env.NEXT_DOMAIN_URL}/products?keyword=${keyword}`;
+        console.log('Calling API:', url); // Log URL being called
 
-        const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/products?keyword=${keyword}`,
-            {
-                next: { revalidate: 60 },
-            }
-        );
+        const res = await fetch(url, {
+            next: { revalidate: 60 },
+        });
 
         if (!res.ok) {
             await logErrorDetails(res); // Log detailed error info
@@ -78,14 +76,12 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
             limit = 10,
         } = props?.searchParams || {};
 
-        console.log('Calling API:', `${process.env.NEXT_DOMAIN_URL}/products?category=phone&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`);
+        const url = `${process.env.NEXT_DOMAIN_URL}/products?category=phone&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`;
+        console.log('Calling API:', url); // Log URL being called
 
-        const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/products?category=phone&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`,
-            {
-                next: { revalidate: 60 },
-            }
-        );
+        const res = await fetch(url, {
+            next: { revalidate: 60 },
+        });
 
         if (!res.ok) {
             await logErrorDetails(res); // Log detailed error info
@@ -117,14 +113,12 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
             limit = 10,
         } = props?.searchParams || {};
 
-        console.log('Calling API:', `${process.env.NEXT_DOMAIN_URL}/products?category=laptop&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`);
+        const url = `${process.env.NEXT_DOMAIN_URL}/products?category=laptop&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`;
+        console.log('Calling API:', url); // Log URL being called
 
-        const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/products?category=laptop&brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}&pricerange=${pricerange}&page=${page}&limit=${limit}`,
-            {
-                next: { revalidate: 60 },
-            }
-        );
+        const res = await fetch(url, {
+            next: { revalidate: 60 },
+        });
 
         if (!res.ok) {
             await logErrorDetails(res); // Log detailed error info
@@ -144,14 +138,12 @@ export const fetchLaptopProducts = async (props: FetchProductsProps) => {
 export const fetchProductDetail = async (props: FetchProductDetailProps) => {
     try {
         const { _id } = props;
-        console.log('Calling API:', `${process.env.NEXT_DOMAIN_URL}/products/${_id}`);
+        const url = `${process.env.NEXT_DOMAIN_URL}/products/${_id}`;
+        console.log('Calling API:', url); // Log URL being called
 
-        const res = await fetch(
-            `${process.env.NEXT_DOMAIN_URL}/products/${_id}`,
-            {
-                next: { revalidate: 60 },
-            }
-        );
+        const res = await fetch(url, {
+            next: { revalidate: 60 },
+        });
 
         if (!res.ok) {
             await logErrorDetails(res); // Log detailed error info
