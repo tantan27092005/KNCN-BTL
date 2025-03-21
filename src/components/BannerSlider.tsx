@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 
 const BannerSlider = ({ images, visibleNumber }) => {
     return (
-        <div className="w-full h-[180px] overflow-hidden"> {/* Đặt kích thước cố định cho container */}
+        <div className="w-full h-[180px] overflow-hidden"> {/* Container với kích thước cố định */}
             <Swiper
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={10}
