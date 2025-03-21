@@ -9,9 +9,11 @@ function Banner() {
         <div className="">
             {/* Phần banner-big và slider */}
             <div className="relative flex-1 flex justify-center items-center">
-                <img src={banner_big.src} alt="banner" className="object-contain w-full" />
-                {/* Điều chỉnh vị trí và kích thước của slider */}
-                <div className="w-[80%] absolute bottom-0 left-1/2 transform -translate-x-1/2">
+                {/* Banner-big với z-index cao hơn */}
+                <img src={banner_big.src} alt="banner" className="object-contain w-full z-10" />
+
+                {/* Slider với kích thước cố định và z-index thấp hơn */}
+                <div className="w-[80%] absolute bottom-0 left-1/2 transform -translate-x-1/2 z-0">
                     <BannerSlider images={images} visibleNumber={2} />
                 </div>
             </div>
