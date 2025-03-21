@@ -13,7 +13,7 @@ function Banner() {
                 <img src={banner_big.src} alt="banner" className="object-contain w-full z-10" />
 
                 {/* Slider với z-index thấp hơn và đặt ở phía dưới banner-big */}
-                <div className="w-[80%] absolute top-0 left-1/2 transform -translate-x-1/2 z-50">
+                <div className="w-[80%] absolute top-0 left-1/2 transform -translate-x-1/2 z-10">
                     <BannerSlider images={images} visibleNumber={2} />
                 </div>
             </div>
