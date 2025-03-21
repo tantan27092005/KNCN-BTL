@@ -52,15 +52,15 @@ interface FetchProductDetailProps {
     _id: string;
 }
 
-// Helper function for logging response errors
+// Helper function to log errors
 const logResponseError = async (res: Response) => {
     const { status, statusText, url } = res;
     console.error(`HTTP Error: ${status} ${statusText} for ${url}`);
     try {
         const responseBody = await res.text();
         console.error('Response Body:', responseBody);
-    } catch (err) {
-        console.error('Failed to read response body:', err.message);
+    } catch {
+        console.error('Failed to read response body.');
     }
 };
 
@@ -71,6 +71,18 @@ const cleanParams = (params: any) => {
         .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 };
 
+// Generic fetch function with timeout handling
+const fetchWithTimeout = async (url: string, options: any, timeout: number = 10000) => {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(url, { ...options, signal: controller.signal });
+        return response;
+    } finally {
+        clearTimeout(id);
+    }
+};
+
 // Generalized fetch function for products
 const fetchProductsByCategory = async (category: string = '', searchParams?: SearchParams): Promise<Product[]> => {
     try {
@@ -78,13 +90,13 @@ const fetchProductsByCategory = async (category: string = '', searchParams?: Sea
         const NEXT_DOMAIN_URL = process.env.NEXT_DOMAIN_URL;
 
         if (!NEXT_DOMAIN_URL) {
-            throw new Error('NEXT_DOMAIN_URL is not defined. Please check your .env file.');
+            throw new Error('NEXT_DOMAIN_URL is not defined in .env file.');
         }
 
         const url = `${NEXT_DOMAIN_URL}/products${category ? `?category=${category}` : ''}&${queryParams}`;
         console.log('Calling API:', url);
 
-        const res = await fetch(url, { next: { revalidate: 60 } });
+        const res = await fetchWithTimeout(url, { next: { revalidate: 60 } }, 10000);
 
         if (!res.ok) {
             console.error(`Failed to fetch. Status: ${res.status}, Text: ${res.statusText}`);
@@ -99,7 +111,7 @@ const fetchProductsByCategory = async (category: string = '', searchParams?: Sea
     }
 };
 
-// Specific functions using the generalized fetcher
+// Fetch functions for products and details
 export const fetchProducts = async (props: FetchProductsProps): Promise<Product[]> =>
     fetchProductsByCategory('', props?.searchParams);
 
@@ -109,20 +121,19 @@ export const fetchPhoneProducts = async (props: FetchProductsProps): Promise<Pro
 export const fetchLaptopProducts = async (props: FetchProductsProps): Promise<Product[]> =>
     fetchProductsByCategory('laptop', props?.searchParams);
 
-// Fetch product detail
 export const fetchProductDetail = async (props: FetchProductDetailProps): Promise<Product | null> => {
     try {
         const { _id } = props;
         const NEXT_DOMAIN_URL = process.env.NEXT_DOMAIN_URL;
 
         if (!NEXT_DOMAIN_URL) {
-            throw new Error('NEXT_DOMAIN_URL is not defined. Please check your .env file.');
+            throw new Error('NEXT_DOMAIN_URL is not defined in .env file.');
         }
 
         const url = `${NEXT_DOMAIN_URL}/products/${_id}`;
         console.log('Calling API for product detail:', url);
 
-        const res = await fetch(url, { next: { revalidate: 60 } });
+        const res = await fetchWithTimeout(url, { next: { revalidate: 60 } }, 10000);
 
         if (!res.ok) {
             console.error(`Failed to fetch product detail. Status: ${res.status}, Text: ${res.statusText}`);
