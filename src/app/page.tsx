@@ -7,8 +7,13 @@ import { fetchLaptopProducts, fetchPhoneProducts } from '@/api';
 
 export default async function Home() {
     try {
+        // Fetch data for Flash Sale (Phones)
         const dataFlashSaleRandom = await fetchPhoneProducts({}) || [];
+        console.log('Flash Sale Data:', dataFlashSaleRandom);
+
+        // Fetch data for Laptop Promotions
         const dataLaptopRandom = await fetchLaptopProducts({}) || [];
+        console.log('Laptop Promotion Data:', dataLaptopRandom);
 
         return (
             <main className="bg-[#f3efef] space-y-[30px]">
@@ -31,6 +36,7 @@ export default async function Home() {
         );
     } catch (error) {
         console.error('Error in Home page:', error);
+
         return (
             <main className="bg-[#f3efef] space-y-[30px]">
                 <section className="padding max-lg:hidden">
