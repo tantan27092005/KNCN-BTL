@@ -11,14 +11,14 @@ export default async function Home() {
 
     try {
         dataFlashSaleRandom = await fetchPhoneProducts({ searchParams: { limit: 10 } });
-        console.log('Fetched Flash Sale data:', dataFlashSaleRandom);
+        console.log('Fetched Flash Sale products:', dataFlashSaleRandom);
     } catch (error) {
         console.error('Error fetching Flash Sale data:', error.message);
     }
 
     try {
         dataLaptopRandom = await fetchLaptopProducts({ searchParams: { limit: 10 } });
-        console.log('Fetched Laptop Promotion data:', dataLaptopRandom);
+        console.log('Fetched Laptop Promotion products:', dataLaptopRandom);
     } catch (error) {
         console.error('Error fetching Laptop Promotion data:', error.message);
     }
