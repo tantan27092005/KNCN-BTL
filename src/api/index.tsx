@@ -23,15 +23,15 @@ interface FetchProductDetailProps {
     _id: string;
 }
 
-// Helper function to log response details
-const logResponseDetails = async (res: Response) => {
+// Helper to log response errors
+const logResponseError = async (res: Response) => {
     console.error('HTTP Status Code:', res.status);
     console.error('Response Headers:', JSON.stringify([...res.headers]));
     try {
         const responseBody = await res.text();
         console.error('Response Body:', responseBody);
     } catch (err) {
-        console.error('Error parsing response body:', err.message);
+        console.error('Failed to read response body:', err.message);
     }
 };
 
@@ -40,13 +40,13 @@ export const fetchProducts = async (props: FetchProductsProps) => {
     try {
         const { keyword = '' } = props?.searchParams || {};
         const url = `${process.env.NEXT_DOMAIN_URL}/products?keyword=${keyword}`;
-        console.log('Fetching Products - API URL:', url);
+        console.log('Calling API:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
 
         if (!res.ok) {
-            await logResponseDetails(res);
-            throw new Error(`Failed to fetch products. HTTP Status: ${res.status}`);
+            await logResponseError(res);
+            throw new Error('Failed to fetch products');
         }
 
         const products = await res.json();
@@ -61,21 +61,20 @@ export const fetchProducts = async (props: FetchProductsProps) => {
 // Fetch phone products
 export const fetchPhoneProducts = async (props: FetchProductsProps) => {
     try {
-        const { category = 'phone', ...searchParams } = props?.searchParams || {};
-        const query = new URLSearchParams(searchParams as any).toString();
-        const url = `${process.env.NEXT_DOMAIN_URL}/products?category=${category}&${query}`;
-        console.log('Fetching Phone Products - API URL:', url);
+        const queryParams = new URLSearchParams(props?.searchParams as any).toString();
+        const url = `${process.env.NEXT_DOMAIN_URL}/products?category=phone&${queryParams}`;
+        console.log('Calling API:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
 
         if (!res.ok) {
-            await logResponseDetails(res);
-            throw new Error(`Failed to fetch phone products. HTTP Status: ${res.status}`);
+            await logResponseError(res);
+            throw new Error('Failed to fetch phone products');
         }
 
-        const phoneProducts = await res.json();
-        console.log('Phone products fetched successfully:', phoneProducts);
-        return phoneProducts;
+        const products = await res.json();
+        console.log('Phone products fetched successfully:', products);
+        return products;
     } catch (err) {
         console.error('Error in fetchPhoneProducts:', err.message);
         return [];
@@ -85,43 +84,43 @@ export const fetchPhoneProducts = async (props: FetchProductsProps) => {
 // Fetch laptop products
 export const fetchLaptopProducts = async (props: FetchProductsProps) => {
     try {
-        const { category = 'laptop', ...searchParams } = props?.searchParams || {};
-        const query = new URLSearchParams(searchParams as any).toString();
-        const url = `${process.env.NEXT_DOMAIN_URL}/products?category=${category}&${query}`;
-        console.log('Fetching Laptop Products - API URL:', url);
+        const queryParams = new URLSearchParams(props?.searchParams as any).toString();
+        const url = `${process.env.NEXT_DOMAIN_URL}/products?category=laptop&${queryParams}`;
+        console.log('Calling API:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
 
         if (!res.ok) {
-            await logResponseDetails(res);
-            throw new Error(`Failed to fetch laptop products. HTTP Status: ${res.status}`);
+            await logResponseError(res);
+            throw new Error('Failed to fetch laptop products');
         }
 
-        const laptopProducts = await res.json();
-        console.log('Laptop products fetched successfully:', laptopProducts);
-        return laptopProducts;
+        const products = await res.json();
+        console.log('Laptop products fetched successfully:', products);
+        return products;
     } catch (err) {
         console.error('Error in fetchLaptopProducts:', err.message);
         return [];
     }
 };
 
-// Fetch product details
-export const fetchProductDetail = async ({ _id }: FetchProductDetailProps) => {
+// Fetch product detail
+export const fetchProductDetail = async (props: FetchProductDetailProps) => {
     try {
+        const { _id } = props;
         const url = `${process.env.NEXT_DOMAIN_URL}/products/${_id}`;
-        console.log('Fetching Product Detail - API URL:', url);
+        console.log('Calling API:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
 
         if (!res.ok) {
-            await logResponseDetails(res);
-            throw new Error(`Failed to fetch product detail. HTTP Status: ${res.status}`);
+            await logResponseError(res);
+            throw new Error('Failed to fetch product details');
         }
 
-        const productDetail = await res.json();
-        console.log('Product detail fetched successfully:', productDetail);
-        return productDetail;
+        const product = await res.json();
+        console.log('Product details fetched successfully:', product);
+        return product;
     } catch (err) {
         console.error('Error in fetchProductDetail:', err.message);
         return null;
