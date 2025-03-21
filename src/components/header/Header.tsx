@@ -12,7 +12,7 @@ function Header() {
     return (
         <div className="">
             {/* Phần NavAdmin (ẩn trên mobile) */}
-            <div className='max-xl:hidden'>
+            <div className="max-xl:hidden">
                 <NavAdmin />
             </div>
 
@@ -22,15 +22,15 @@ function Header() {
             </header>
 
             {/* Phần Nav cố định khi cuộn trang */}
-            <div className="sticky top-0 z-50">
-                <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
+            <div className="sticky top-0 z-50 bg-[#2A83E9]">
+                <nav className="padding w-full max-xl:bg-transparent">
                     <Nav dataPlaces={dataPlaces} />
                 </nav>
             </div>
 
             {/* Phần MenuBar cố định khi cuộn trang */}
-            <div className="sticky top-[60px] z-40">
-                <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
+            <div className="sticky top-[60px] z-40 bg-[#2A83E9]">
+                <nav className="padding w-full max-xl:bg-transparent">
                     <MenuBar menuBar={menuBar} />
                 </nav>
             </div>
