@@ -10,10 +10,10 @@ function Banner() {
             {/* Phần banner-big và slider */}
             <div className="relative flex-1 flex justify-center items-center">
                 {/* Banner-big với z-index cao hơn */}
-                <img src={banner_big.src} alt="banner" className="object-contain w-full z-10" />
+                <img src={banner_big.src} alt="banner" className="object-contain w-full z-20" />
 
                 {/* Slider với z-index thấp hơn và đặt ở phía dưới banner-big */}
-                <div className="w-[80%] absolute bottom-0 left-1/2 transform -translate-x-1/2 z-40">
+                <div className="w-[80%] absolute top-0 left-1/2 transform -translate-x-1/2 z-10">
                     <BannerSlider images={images} visibleNumber={2} />
                 </div>
             </div>
