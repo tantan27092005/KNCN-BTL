@@ -6,55 +6,38 @@ import PromotionDeals from '@/components/home-sections/Deals/PromotionDeals';
 import { fetchLaptopProducts, fetchPhoneProducts } from '@/api';
 
 export default async function Home() {
+    let dataFlashSaleRandom: any[] = [];
+    let dataLaptopRandom: any[] = [];
+
     try {
-        // Fetch data for Flash Sale (Phones)
-        const dataFlashSaleRandom = await fetchPhoneProducts({}) || [];
-        console.log('Flash Sale Data:', dataFlashSaleRandom);
-
-        // Fetch data for Laptop Promotions
-        const dataLaptopRandom = await fetchLaptopProducts({}) || [];
-        console.log('Laptop Promotion Data:', dataLaptopRandom);
-
-        return (
-            <main className="bg-[#f3efef] space-y-[30px]">
-                <section className="padding max-lg:hidden">
-                    <Banner />
-                </section>
-                <section className="padding">
-                    <FlashSaleDeals dataFlashSaleRandom={dataFlashSaleRandom} />
-                </section>
-                <section className="padding">
-                    <PromotionDeals dataLaptopRandom={dataLaptopRandom} />
-                </section>
-                <section className="padding max-lg:hidden">
-                    <CateFuture />
-                </section>
-                <section className="padding">
-                    <Promo />
-                </section>
-            </main>
-        );
-    } catch (error) {
-        console.error('Error in Home page:', error);
-
-        return (
-            <main className="bg-[#f3efef] space-y-[30px]">
-                <section className="padding max-lg:hidden">
-                    <Banner />
-                </section>
-                <section className="padding">
-                    <FlashSaleDeals dataFlashSaleRandom={[]} />
-                </section>
-                <section className="padding">
-                    <PromotionDeals dataLaptopRandom={[]} />
-                </section>
-                <section className="padding max-lg:hidden">
-                    <CateFuture />
-                </section>
-                <section className="padding">
-                    <Promo />
-                </section>
-            </main>
-        );
+        dataFlashSaleRandom = await fetchPhoneProducts({}) || [];
+    } catch (err) {
+        console.error('Error fetching Flash Sale products:', err.message);
     }
+
+    try {
+        dataLaptopRandom = await fetchLaptopProducts({}) || [];
+    } catch (err) {
+        console.error('Error fetching Laptop products:', err.message);
+    }
+
+    return (
+        <main className="bg-[#f3efef] space-y-[30px]">
+            <section className="padding max-lg:hidden">
+                <Banner />
+            </section>
+            <section className="padding">
+                <FlashSaleDeals dataFlashSaleRandom={dataFlashSaleRandom} />
+            </section>
+            <section className="padding">
+                <PromotionDeals dataLaptopRandom={dataLaptopRandom} />
+            </section>
+            <section className="padding max-lg:hidden">
+                <CateFuture />
+            </section>
+            <section className="padding">
+                <Promo />
+            </section>
+        </main>
+    );
 }
