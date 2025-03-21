@@ -33,7 +33,7 @@ function Nav() {
                     </Link>
                 </li>
                 <li className="text-xs max-xl:hidden">
-                    <button className="text-xs space-x-2 bg-[#FFBC06] h-12 px-2" onClick={handleOpenModal}>
+                    <button className="text-white space-x-2 h-12 px-2" onClick={handleOpenModal}>
                         <span>Xem giá tồn kho, tại:</span>
                         <FontAwesomeIcon icon={faSortDown} className="" />
                         <div className="font-bold">{place}</div>
@@ -49,14 +49,14 @@ function Nav() {
                 <li className="max-xl:hidden">
                     <SearchBar text={'Bạn tìm gì ...'} />
                 </li>
-                <li className="text-xs bg-[#FFBC06] h-12 px-2 center max-xl:hidden">
+                <li className="text-white h-12 px-2 center max-xl:hidden">
                     <a>
                         Tài khoản &<br /> Đơn hàng
                     </a>
                 </li>
                 <li className="text-xs h-11">
                     <Link href="/cart">
-                        <button className=" bg-[#FFBC06] h-full px-2 space-x-2">
+                        <button className="text-white h-full px-2 space-x-2">
                             <FontAwesomeIcon icon={faCartShopping} className="text-lg" />
                             <span className="">
                                 <span className="max-xl:hidden"> Giỏ hàng </span> ({count})
@@ -64,13 +64,13 @@ function Nav() {
                         </button>
                     </Link>
                 </li>
-                <li className="max-xl:hidden">
+                <li className="max-xl:hidden text-white">
                     <a>24h Công nghệ</a>
                 </li>
-                <li className="max-xl:hidden">
+                <li className="max-xl:hidden text-white">
                     <a>Hỏi đáp</a>
                 </li>
-                <li className="max-xl:hidden">
+                <li className="max-xl:hidden text-white">
                     <a>Game App</a>
                 </li>
             </ul>
@@ -83,7 +83,7 @@ function Nav() {
 
                 <div className="text-xs h-11 justify-self-center mb-0.5">
                     <Link href="/cart">
-                        <button className=" bg-[#FFBC06] h-full px-1 ">
+                        <button className="text-white h-full px-1">
                             <FontAwesomeIcon icon={faCartShopping} className="text-lg" />
                             <span className="">
                                 <span className="max-xl:hidden"> Giỏ hàng </span> ({count})
