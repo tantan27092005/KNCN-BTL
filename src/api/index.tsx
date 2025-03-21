@@ -23,7 +23,7 @@ interface FetchProductDetailProps {
     _id: string;
 }
 
-// Helper function to log error details
+// Helper function to log detailed errors
 const logErrorDetails = async (res: Response) => {
     console.error('API Response Status:', res.status);
     console.error('API Response Headers:', JSON.stringify([...res.headers]));
