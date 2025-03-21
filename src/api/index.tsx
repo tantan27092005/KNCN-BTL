@@ -25,90 +25,62 @@ interface FetchProductDetailProps {
 
 // Helper to log response errors
 const logResponseError = async (res: Response) => {
-    console.error('HTTP Status Code:', res.status);
-    console.error('Response Headers:', JSON.stringify([...res.headers]));
+    const { status, statusText, url } = res;
+    console.error(`HTTP Error: ${status} ${statusText} for ${url}`);
     try {
-        const responseBody = await res.text();
-        console.error('Response Body:', responseBody);
-    } catch (err) {
-        console.error('Failed to read response body:', err.message);
+        const responseBody = await res.json();
+        console.error('Error Details:', JSON.stringify(responseBody, null, 2));
+    } catch {
+        console.error('Failed to parse error response body.');
     }
 };
 
-// Fetch all products
-export const fetchProducts = async (props: FetchProductsProps) => {
+// Generalized fetch function for products by category
+const fetchProductsByCategory = async (category: string, searchParams?: SearchParams) => {
     try {
-        const { keyword = '' } = props?.searchParams || {};
-        const url = `${process.env.NEXT_DOMAIN_URL}/products?keyword=${keyword}`;
+        const cleanParams = (params: any) => {
+            return Object.entries(params || {})
+                .filter(([_, value]) => value !== undefined && value !== null)
+                .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+        };
+
+        const queryParams = new URLSearchParams(cleanParams(searchParams)).toString();
+        const NEXT_DOMAIN_URL = process.env.NEXT_DOMAIN_URL; // Cache environment variable
+        const url = `${NEXT_DOMAIN_URL}/products?category=${category}&${queryParams}`;
         console.log('Calling API:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
 
         if (!res.ok) {
             await logResponseError(res);
-            throw new Error('Failed to fetch products');
+            throw new Error(`Failed to fetch products for category: ${category}`);
         }
 
         const products = await res.json();
-        console.log('Products fetched successfully:', products);
+        console.log(`${category} products fetched successfully:`, products);
         return products;
     } catch (err) {
-        console.error('Error in fetchProducts:', err.message);
+        console.error(`Error in fetchProductsByCategory (${category}):`, err.message);
         return [];
     }
 };
 
-// Fetch phone products
-export const fetchPhoneProducts = async (props: FetchProductsProps) => {
-    try {
-        const queryParams = new URLSearchParams(props?.searchParams as any).toString();
-        const url = `${process.env.NEXT_DOMAIN_URL}/products?category=phone&${queryParams}`;
-        console.log('Calling API:', url);
+// Specific functions using the generalized fetcher
+export const fetchProducts = async (props: FetchProductsProps) =>
+    fetchProductsByCategory('', props?.searchParams);
 
-        const res = await fetch(url, { next: { revalidate: 60 } });
+export const fetchPhoneProducts = async (props: FetchProductsProps) =>
+    fetchProductsByCategory('phone', props?.searchParams);
 
-        if (!res.ok) {
-            await logResponseError(res);
-            throw new Error('Failed to fetch phone products');
-        }
-
-        const products = await res.json();
-        console.log('Phone products fetched successfully:', products);
-        return products;
-    } catch (err) {
-        console.error('Error in fetchPhoneProducts:', err.message);
-        return [];
-    }
-};
-
-// Fetch laptop products
-export const fetchLaptopProducts = async (props: FetchProductsProps) => {
-    try {
-        const queryParams = new URLSearchParams(props?.searchParams as any).toString();
-        const url = `${process.env.NEXT_DOMAIN_URL}/products?category=laptop&${queryParams}`;
-        console.log('Calling API:', url);
-
-        const res = await fetch(url, { next: { revalidate: 60 } });
-
-        if (!res.ok) {
-            await logResponseError(res);
-            throw new Error('Failed to fetch laptop products');
-        }
-
-        const products = await res.json();
-        console.log('Laptop products fetched successfully:', products);
-        return products;
-    } catch (err) {
-        console.error('Error in fetchLaptopProducts:', err.message);
-        return [];
-    }
-};
+export const fetchLaptopProducts = async (props: FetchProductsProps) =>
+    fetchProductsByCategory('laptop', props?.searchParams);
 
 // Fetch product detail
 export const fetchProductDetail = async (props: FetchProductDetailProps) => {
     try {
         const { _id } = props;
-        const url = `${process.env.NEXT_DOMAIN_URL}/products/${_id}`;
+        const NEXT_DOMAIN_URL = process.env.NEXT_DOMAIN_URL;
+        const url = `${NEXT_DOMAIN_URL}/products/${_id}`;
         console.log('Calling API:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
