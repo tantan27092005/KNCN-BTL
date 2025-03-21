@@ -14,7 +14,7 @@ function Header() {
             <div className='max-xl:hidden'>
            <NavAdmin/>
             </div>
-            <header className="w-full padding bg-[#FFE8B9] max-xl:hidden">
+            <header className="w-full padding bg-[#2A83E9] max-xl:hidden">
                 <img src={banner.src} alt="banner" />
             </header>
             <nav className="padding bg-[#FFD400] w-full max-xl:bg-transparent">
