@@ -10,9 +10,9 @@ function Header() {
     const [dataPlaces, setDataPlaces] = useState([]);
 
     return (
-        <div>
+        <div className="">
             {/* Phần NavAdmin (ẩn trên mobile) */}
-            <div className="max-xl:hidden">
+            <div className='max-xl:hidden'>
                 <NavAdmin />
             </div>
 
@@ -21,21 +21,25 @@ function Header() {
                 <img src={banner.src} alt="banner" className="w-full" />
             </header>
 
-            {/* Phần Nav cố định ở đầu trang */}
-            <div className="fixed top-0 left-0 w-full bg-[#2A83E9] z-50">
+            {/* Phần Nav cố định khi cuộn trang */}
+            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent fixed top-0 left-0 right-0 z-50">
                 <Nav dataPlaces={dataPlaces} />
-            </div>
+            </nav>
 
-            {/* Phần MenuBar cố định ngay dưới Nav */}
-            <div className="fixed top-[60px] left-0 w-full bg-[#2A83E9] z-40">
+            {/* Phần MenuBar cố định khi cuộn trang */}
+            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent fixed top-[60px] left-0 right-0 z-40">
                 <MenuBar menuBar={menuBar} />
-            </div>
+            </nav>
 
-            {/* Nội dung khác của trang */}
-            <main className="pt-[120px]">
-                <p>Đây là nội dung của trang nằm dưới Nav và MenuBar.</p>
-                <p>Cuộn trang để kiểm tra hành vi cố định.</p>
-            </main>
+            {/* Thêm padding-top vào phần nội dung chính để tránh bị che khuất */}
+            <div className="pt-[120px]"> {/* Giả sử tổng chiều cao của Nav và MenuBar là 120px */}
+                {/* Phần nội dung chính của trang */}
+                {/* Ví dụ: */}
+                <div className="p-4">
+                    <h1>Nội dung chính của trang</h1>
+                    <p>Cuộn trang để xem hiệu ứng cố định.</p>
+                </div>
+            </div>
         </div>
     );
 }
