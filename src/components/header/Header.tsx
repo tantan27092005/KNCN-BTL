@@ -17,7 +17,7 @@ function Header() {
             <header className="w-full padding bg-[#2A83E9] max-xl:hidden">
                 <img src={banner.src} alt="banner" />
             </header>
-            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
+            <nav className="padding bg-[#FFE8B9] w-full max-xl:bg-transparent">
                 <Nav dataPlaces= {dataPlaces}/>
                 <MenuBar menuBar={menuBar} />
             </nav>
