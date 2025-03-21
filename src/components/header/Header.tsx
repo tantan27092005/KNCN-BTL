@@ -22,14 +22,18 @@ function Header() {
             </header>
 
             {/* Phần Nav cố định khi cuộn trang */}
-            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent sticky top-0 z-50">
-                <Nav dataPlaces={dataPlaces} />
-            </nav>
+            <div className="sticky top-0 z-50">
+                <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
+                    <Nav dataPlaces={dataPlaces} />
+                </nav>
+            </div>
 
             {/* Phần MenuBar cố định khi cuộn trang */}
-            <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent sticky top-[60px] z-40">
-                <MenuBar menuBar={menuBar} />
-            </nav>
+            <div className="sticky top-[60px] z-40">
+                <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
+                    <MenuBar menuBar={menuBar} />
+                </nav>
+            </div>
         </div>
     );
 }
