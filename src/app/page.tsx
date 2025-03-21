@@ -6,23 +6,8 @@ import PromotionDeals from '@/components/home-sections/Deals/PromotionDeals';
 import { fetchLaptopProducts, fetchPhoneProducts } from '@/api';
 
 export default async function Home() {
-    let dataFlashSaleRandom: any[] = [];
-    let dataLaptopRandom: any[] = [];
-
-    try {
-        dataFlashSaleRandom = await fetchPhoneProducts({ searchParams: { limit: 10 } });
-        console.log('Fetched Flash Sale products:', dataFlashSaleRandom);
-    } catch (error) {
-        console.error('Error fetching Flash Sale data:', error.message);
-    }
-
-    try {
-        dataLaptopRandom = await fetchLaptopProducts({ searchParams: { limit: 10 } });
-        console.log('Fetched Laptop Promotion products:', dataLaptopRandom);
-    } catch (error) {
-        console.error('Error fetching Laptop Promotion data:', error.message);
-    }
-
+    const dataFlashSaleRandom = await fetchPhoneProducts({}) || [];
+    const dataLaptopRandom = await fetchLaptopProducts({});
     return (
         <main className="bg-[#f3efef] space-y-[30px]">
             <section className="padding max-lg:hidden">
