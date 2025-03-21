@@ -1,10 +1,39 @@
 'use server';
 
+interface ProductImage {
+    thumbnail: string;
+    bigProduct: string;
+    title: string;
+    _id: string;
+}
+
+interface Product {
+    _id: string;
+    title: string;
+    desc: string;
+    main_image: string;
+    image: ProductImage[];
+    isPromotion: boolean;
+    originalPrice: number;
+    promotionPercent: number;
+    salePrice: number;
+    rate: number;
+    screen: string;
+    storage: number;
+    ram: number;
+    battery: number;
+    camera: number;
+    charger: number;
+    brand: string;
+    category: string;
+    type: string;
+    __v: number;
+}
+
 interface SearchParams {
     category?: string;
     brand?: string;
     ram?: number;
-    type?: string;
     screen?: number;
     storage?: number;
     charger?: number;
@@ -23,65 +52,74 @@ interface FetchProductDetailProps {
     _id: string;
 }
 
-// Helper to log response errors
+// Helper function for logging response errors
 const logResponseError = async (res: Response) => {
     const { status, statusText, url } = res;
     console.error(`HTTP Error: ${status} ${statusText} for ${url}`);
     try {
-        const responseBody = await res.json();
-        console.error('Error Details:', JSON.stringify(responseBody, null, 2));
-    } catch {
-        console.error('Failed to parse error response body.');
+        const responseBody = await res.text();
+        console.error('Response Body:', responseBody);
+    } catch (err) {
+        console.error('Failed to read response body:', err.message);
     }
 };
 
-// Generalized fetch function for products by category
-const fetchProductsByCategory = async (category: string, searchParams?: SearchParams) => {
-    try {
-        const cleanParams = (params: any) => {
-            return Object.entries(params || {})
-                .filter(([_, value]) => value !== undefined && value !== null)
-                .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-        };
+// Clean search parameters to remove undefined or null values
+const cleanParams = (params: any) => {
+    return Object.entries(params || {})
+        .filter(([_, value]) => value !== undefined && value !== null)
+        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+};
 
+// Generalized fetch function for products
+const fetchProductsByCategory = async (category: string = '', searchParams?: SearchParams): Promise<Product[]> => {
+    try {
         const queryParams = new URLSearchParams(cleanParams(searchParams)).toString();
-        const NEXT_DOMAIN_URL = process.env.NEXT_DOMAIN_URL; // Cache environment variable
-        const url = `${NEXT_DOMAIN_URL}/products?category=${category}&${queryParams}`;
-        console.log('Calling API:', url);
+        const NEXT_DOMAIN_URL = process.env.NEXT_DOMAIN_URL;
+
+        if (!NEXT_DOMAIN_URL) {
+            throw new Error('NEXT_DOMAIN_URL is not defined. Please check your .env file.');
+        }
+
+        const url = `${NEXT_DOMAIN_URL}/products${category ? `?category=${category}` : ''}&${queryParams}`;
+        console.log('Fetching:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
 
         if (!res.ok) {
             await logResponseError(res);
-            throw new Error(`Failed to fetch products for category: ${category}`);
+            throw new Error(`Failed to fetch products for category: ${category || 'all'}`);
         }
 
-        const products = await res.json();
-        console.log(`${category} products fetched successfully:`, products);
-        return products;
+        return await res.json();
     } catch (err) {
-        console.error(`Error in fetchProductsByCategory (${category}):`, err.message);
+        console.error(`Error fetching products (${category || 'all'}):`, err.message);
         return [];
     }
 };
 
 // Specific functions using the generalized fetcher
-export const fetchProducts = async (props: FetchProductsProps) =>
+export const fetchProducts = async (props: FetchProductsProps): Promise<Product[]> =>
     fetchProductsByCategory('', props?.searchParams);
 
-export const fetchPhoneProducts = async (props: FetchProductsProps) =>
+export const fetchPhoneProducts = async (props: FetchProductsProps): Promise<Product[]> =>
     fetchProductsByCategory('phone', props?.searchParams);
 
-export const fetchLaptopProducts = async (props: FetchProductsProps) =>
+export const fetchLaptopProducts = async (props: FetchProductsProps): Promise<Product[]> =>
     fetchProductsByCategory('laptop', props?.searchParams);
 
 // Fetch product detail
-export const fetchProductDetail = async (props: FetchProductDetailProps) => {
+export const fetchProductDetail = async (props: FetchProductDetailProps): Promise<Product | null> => {
     try {
         const { _id } = props;
         const NEXT_DOMAIN_URL = process.env.NEXT_DOMAIN_URL;
+
+        if (!NEXT_DOMAIN_URL) {
+            throw new Error('NEXT_DOMAIN_URL is not defined. Please check your .env file.');
+        }
+
         const url = `${NEXT_DOMAIN_URL}/products/${_id}`;
-        console.log('Calling API:', url);
+        console.log('Fetching product detail:', url);
 
         const res = await fetch(url, { next: { revalidate: 60 } });
 
@@ -90,11 +128,9 @@ export const fetchProductDetail = async (props: FetchProductDetailProps) => {
             throw new Error('Failed to fetch product details');
         }
 
-        const product = await res.json();
-        console.log('Product details fetched successfully:', product);
-        return product;
+        return await res.json();
     } catch (err) {
-        console.error('Error in fetchProductDetail:', err.message);
+        console.error('Error fetching product detail:', err.message);
         return null;
     }
 };
