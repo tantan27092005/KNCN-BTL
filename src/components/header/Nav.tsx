@@ -29,7 +29,7 @@ function Nav() {
             <ul className="w-full h-11 p-2.5 text-sm center max-lg:p-1 max-xl:hidden">
                 <li className="">
                     <Link href="/">
-                        <img src={logo.src} alt="logo" className="w-40 h-8" />
+                        <img src={logo.src} alt="logo" className="w-62.8 h-10" />
                     </Link>
                 </li>
                 <li className="text-xs max-xl:hidden">
