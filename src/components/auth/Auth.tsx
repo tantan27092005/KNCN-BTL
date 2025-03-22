@@ -16,7 +16,7 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
             {/* Phần nút SIGN IN/SIGN UP */}
             <div className="mt-6 center-x space-x-2">
                 <FontAwesomeIcon icon={faLock} className="text-white" /> {/* Icon màu trắng */}
-                <button className="text-white bg-transparent border-none focus:outline-none">
+                <button className="text-white bg-transparent border-none focus:outline-none hover:text-gray-300">
                     {isSignup ? 'SIGN-UP' : 'SIGN-IN'} {/* Hiển thị chữ "SIGN-IN" hoặc "SIGN-UP" */}
                 </button>
             </div>
@@ -75,7 +75,11 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
                     <Button type="submit" title={'SUBMIT'} color={'red'} bgBtn={'hover:bg-red-500 active:bg-red-700'} />
                 </div>
                 <div className="mt-6 center-x">
-                    <button type="button" onClick={switchMode}>
+                    <button
+                        type="button"
+                        onClick={switchMode}
+                        className="text-blue-500 hover:text-blue-600"
+                    >
                         {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
                     </button>
                 </div>
