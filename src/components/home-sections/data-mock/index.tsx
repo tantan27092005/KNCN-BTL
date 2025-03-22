@@ -10,6 +10,8 @@ import banner_content3 from '../assets/banner-content3.png';
 import banner_content4 from '../assets/banner-content4.png';
 import banner_content5 from '../assets/banner-content5.png';
 import banner_content6 from '../assets/banner-content6.png';
+import banner_content7 from '../assets/banner-content7.png';
+import banner_content8 from '../assets/banner-content8.png';
 import dtdd from '../assets/dtdd.png';
 import laptop from '../assets/laptop.png';
 import tablet from '../assets/tablet.png';
@@ -73,6 +75,16 @@ export const bannerContent = [
         title: 'Loa',
         id: 6,
         image: banner_content6,
+    },
+    {
+        title: 'Máy lọc nước',
+        id: 7,
+        image: banner_content7,
+    },
+    {
+        title: 'Hút bụi',
+        id: 8,
+        image: banner_content8,
     },
 ];
 
