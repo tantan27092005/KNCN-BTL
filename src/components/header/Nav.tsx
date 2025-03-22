@@ -21,9 +21,7 @@ function Nav() {
     const handleCloseModal = () => {
         setShowModal(false);
     };
-    const place = useSelector(state=>state.placeName.place);
-   
-
+    const place = useSelector(state => state.placeName.place);
 
     return (
         <nav className="w-full h-11 py-4 max-lg:py-1">
@@ -51,10 +49,7 @@ function Nav() {
                     <SearchBar text={'Bạn tìm gì ...'} />
                 </li>
                 <li className="text-white h-12 px-2 center max-xl:hidden">
-                    <a>
-{/*                         //Tài khoản &<br /> Đơn hàng */}
-                        <NavAdmin />
-                    </a>
+                    <NavAdmin />
                 </li>
                 <li className="text-xs h-11">
                     <Link href="/cart">
