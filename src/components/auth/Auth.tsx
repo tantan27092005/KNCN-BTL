@@ -12,31 +12,34 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
     const handleShowPassword = () => setShowPassword((prev) => !prev);
 
     return (
-        <div className="text-md font-medium text-gray-900 space-y-4 shadow-lg bg-slate-50 py-4">
-            {/* Phần nút SIGN IN/SIGN UP */}
-            <div className="mt-6 center-x space-x-2">
-                <FontAwesomeIcon icon={faLock} className="text-white" /> {/* Icon màu trắng */}
-                <button className="text-white bg-transparent border-none focus:outline-none hover:text-gray-300">
-                    {isSignup ? 'SIGN-UP' : 'SIGN-IN'} {/* Hiển thị chữ "SIGN-IN" hoặc "SIGN-UP" */}
-                </button>
+        <div className="text-md font-medium text-gray-900 space-y-4 shadow-lg bg-white py-8 px-6 rounded-lg w-full max-w-md mx-auto">
+            {/* Phần tiêu đề */}
+            <div className="text-center">
+                <FontAwesomeIcon icon={faLock} className="text-blue-500 text-4xl mb-4" /> {/* Icon màu xanh */}
+                <h2 className="text-2xl font-bold text-gray-800">
+                    {isSignup ? 'Đăng ký' : 'Đăng nhập'}
+                </h2>
+                <p className="text-gray-600 mt-2">
+                    {isSignup ? 'Tạo tài khoản mới' : 'Đăng nhập để tiếp tục'}
+                </p>
             </div>
 
             {/* Form đăng nhập/đăng ký */}
-            <form onSubmit={handleSubmit} className="space-y-2 px-4 ">
+            <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                 {isSignup && (
                     <>
                         <Input
                             name={'firstName'}
-                            placeholder={'First Name'}
-                            label={'First Name'}
+                            placeholder={'Họ'}
+                            label={'Họ'}
                             handleChange={handleChange}
                             type={'text'}
                             value={formData.firstName}
                         />
                         <Input
                             name={'lastName'}
-                            placeholder={'Last Name'}
-                            label={'Last Name'}
+                            placeholder={'Tên'}
+                            label={'Tên'}
                             handleChange={handleChange}
                             type={'text'}
                             value={formData.lastName}
@@ -45,16 +48,16 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
                 )}
                 <Input
                     name={'email'}
-                    placeholder={'Email Address'}
-                    label={'Email Address'}
+                    placeholder={'Email'}
+                    label={'Email'}
                     handleChange={handleChange}
                     type={'email'}
                     value={formData.email}
                 />
                 <Input
                     name={'password'}
-                    placeholder={'Password'}
-                    label={'Password'}
+                    placeholder={'Mật khẩu'}
+                    label={'Mật khẩu'}
                     handleChange={handleChange}
                     type={showPassword ? 'text' : 'password'}
                     handleShowPassword={handleShowPassword}
@@ -63,24 +66,30 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
                 {isSignup && (
                     <Input
                         name={'confirmPassword'}
-                        placeholder={'Repeat Password'}
-                        label={'Repeat Password'}
+                        placeholder={'Nhập lại mật khẩu'}
+                        label={'Nhập lại mật khẩu'}
                         handleChange={handleChange}
                         type={showPassword ? 'text' : 'password'}
                         handleShowPassword={handleShowPassword}
                         value={formData.confirmPassword}
                     />
                 )}
-                <div className="mt-6 center-x">
-                    <Button type="submit" title={'SUBMIT'} color={'red'} bgBtn={'hover:bg-red-500 active:bg-red-700'} />
+                <div className="mt-6">
+                    <Button
+                        type="submit"
+                        title={isSignup ? 'Đăng ký' : 'Đăng nhập'}
+                        color={'white'}
+                        bgBtn={'bg-blue-500 hover:bg-blue-600 active:bg-blue-700'}
+                        className="w-full"
+                    />
                 </div>
-                <div className="mt-6 center-x">
+                <div className="mt-4 text-center">
                     <button
                         type="button"
                         onClick={switchMode}
                         className="text-blue-500 hover:text-blue-600"
                     >
-                        {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+                        {isSignup ? 'Đã có tài khoản? Đăng nhập' : "Chưa có tài khoản? Đăng ký"}
                     </button>
                 </div>
             </form>
