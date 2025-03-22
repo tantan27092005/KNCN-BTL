@@ -13,11 +13,11 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
 
     return (
         <div className="text-md font-medium text-gray-900 space-y-4 shadow-lg bg-slate-50 py-4 w-[520px]">
-            {/* Phần nút đăng nhập/đăng ký */}
+            {/* Phần nút SIGN IN/SIGN UP */}
             <div className="mt-6 center-x space-x-2">
                 <FontAwesomeIcon icon={faLock} className="text-white" /> {/* Icon màu trắng */}
                 <button className="text-white bg-transparent border-none focus:outline-none">
-                    {isSignup ? 'Đăng ký' : 'Đăng nhập'} {/* Hiển thị chữ "Đăng nhập" hoặc "Đăng ký" */}
+                    {isSignup ? 'SIGN-UP' : 'SIGN-IN'} {/* Hiển thị chữ "SIGN-IN" hoặc "SIGN-UP" */}
                 </button>
             </div>
 
