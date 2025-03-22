@@ -43,22 +43,22 @@ export const images = [
 
 export const bannerContent = [
     {
-        title: 'Smartphone Đặc Quyền',
+        title: 'Máy lạnh',
         id: 1,
         image: banner_content1,
     },
     {
-        title: 'Phụ kiện giảm đến 50%',
+        title: 'Tivi',
         id: 2,
         image: banner_content2,
     },
     {
-        title: 'Laptop xả kho Giảm đến 35%',
+        title: 'Tủ lạnh',
         id: 3,
         image: banner_content3,
     },
     {
-        title: 'Giảm đến 50+++',
+        title: 'Đồ gia dụng',
         id: 4,
         image: banner_content4,
     },
