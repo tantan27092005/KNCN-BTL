@@ -8,6 +8,8 @@ import banner_content1 from '../assets/banner-content1.png';
 import banner_content2 from '../assets/banner-content2.png';
 import banner_content3 from '../assets/banner-content3.png';
 import banner_content4 from '../assets/banner-content4.png';
+import banner_content5 from '../assets/banner-content5.png';
+import banner_content6 from '../assets/banner-content6.png';
 import dtdd from '../assets/dtdd.png';
 import laptop from '../assets/laptop.png';
 import tablet from '../assets/tablet.png';
