@@ -190,22 +190,4 @@ export const optionPromo = [
             },
         ],
     },
-    {
-        title: 'CHUỖI MỚI DEAL KHỦNG',
-        id: 2,
-        images: [
-            {
-                name: 'img21',
-                subImage: option1_promo,
-            },
-            {
-                name: 'img22',
-                subImage: option2_promo,
-            },
-            {
-                name: 'img23',
-                subImage: option3_promo,
-            },
-        ],
-    },
 ];
