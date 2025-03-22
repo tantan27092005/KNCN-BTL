@@ -12,7 +12,7 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
     const handleShowPassword = () => setShowPassword((prev) => !prev);
 
     return (
-        <div className="text-md font-medium text-gray-900 space-y-4 shadow-lg bg-slate-50 py-4 w-[520px]">
+        <div className="text-md font-medium text-gray-900 space-y-4 shadow-lg bg-slate-50 py-4">
             {/* Phần nút SIGN IN/SIGN UP */}
             <div className="mt-6 center-x space-x-2">
                 <FontAwesomeIcon icon={faLock} className="text-white" /> {/* Icon màu trắng */}
