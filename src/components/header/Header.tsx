@@ -40,14 +40,18 @@ function Header() {
             </header>
 
             {/* Thanh dataplace (cố định khi cuộn qua banner) */}
-            <nav className={`w-full bg-[#2A83E9] max-xl:bg-transparent transition-all duration-300 ${isSticky ? 'fixed top-0 z-40 shadow-md' : ''}`}>
-                <Nav dataPlaces={dataPlaces} />
-            </nav>
+            <div className={`w-full ${isSticky ? 'fixed top-0 z-40' : ''}`}>
+                <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
+                    <Nav dataPlaces={dataPlaces} />
+                </nav>
+            </div>
 
             {/* Thanh menubar (cố định khi cuộn qua banner) */}
-            <nav className={`w-full bg-[#2A83E9] max-xl:bg-transparent transition-all duration-300 ${isSticky ? 'fixed top-12 z-30 shadow-md' : ''}`}>
-                <MenuBar menuBar={menuBar} />
-            </nav>
+            <div className={`w-full ${isSticky ? 'fixed top-12 z-30' : ''}`}>
+                <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
+                    <MenuBar menuBar={menuBar} />
+                </nav>
+            </div>
 
             {/* Phần nội dung chính của trang */}
             <main className="pt-4">
