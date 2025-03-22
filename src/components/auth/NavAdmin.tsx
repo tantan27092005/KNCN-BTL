@@ -51,14 +51,14 @@ const NavAdmin = () => {
                             <p className='text-white'>Welcome, {nameUser.name}</p>
                             <button
                                 onClick={handleLogout}
-                                className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300"
+                                className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300 w-fit"
                             >
                                 LOG-OUT
                             </button>
                         </div>
                     ) : (
                         <Link href={'/auth'} className="text-white text-sm">
-                            <button className="text-white bg-transparent border-none focus:outline-none hover:text-gray-300">
+                            <button className="text-white bg-transparent border-none focus:outline-none hover:text-gray-300 w-fit">
                                 SIGN-IN
                             </button>
                         </Link>
