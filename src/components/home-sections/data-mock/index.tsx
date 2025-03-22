@@ -62,6 +62,16 @@ export const bannerContent = [
         id: 4,
         image: banner_content4,
     },
+    {
+        title: 'Máy giặt',
+        id: 5,
+        image: banner_content5,
+    },
+    {
+        title: 'Loa',
+        id: 6,
+        image: banner_content6,
+    },
 ];
 
 export const cateFuture = [
