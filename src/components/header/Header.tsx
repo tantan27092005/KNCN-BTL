@@ -23,10 +23,6 @@ function Header() {
             </nav>
             <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
                 <MenuBar menuBar={menuBar} />
-                {/* Thay thế "Tài khoản & Đơn hàng" bằng nút đăng nhập */}
-                <div className="flex items-center justify-end pr-4">
-                    <LoginButton />
-                </div>
             </nav>
         </div>
     );
