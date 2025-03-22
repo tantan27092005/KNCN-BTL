@@ -45,20 +45,20 @@ const NavAdmin = () => {
                         ))}
                     </ul>
                 )}
-                <nav>
+                <nav className="flex items-center space-x-4">
                     {nameUser !== '' ? (
-                        <div className="flex justify-end items-center space-x-4">
+                        <>
                             <p className='text-white'>Welcome, {nameUser.name}</p>
                             <button
                                 onClick={handleLogout}
-                                className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300 w-fit"
+                                className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300"
                             >
                                 Đăng xuất
                             </button>
-                        </div>
+                        </>
                     ) : (
                         <Link href={'/auth'} className="text-white text-sm">
-                            <button className="text-white bg-transparent border-none focus:outline-none hover:text-gray-300 w-fit">
+                            <button className="text-white bg-transparent border-none focus:outline-none hover:text-gray-300">
                                 Đăng nhập
                             </button>
                         </Link>
