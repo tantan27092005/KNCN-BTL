@@ -12,10 +12,6 @@ function Header() {
 
     return (
         <div className="">
-            {/* Hiển thị NavAdmin */}
-            <div className='max-xl:hidden'>
-                <NavAdmin />
-            </div>
             <header className="w-full">
                 <img src={banner.src} alt="banner" className="w-full" />
             </header>
