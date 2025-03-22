@@ -7,26 +7,6 @@ import NavAdmin from '../auth/NavAdmin';
 import { useState, useEffect } from 'react';
 
 function Header() {
-    const [dataPlaces, setDataPlaces] = useState([]);
-    const [isSticky, setIsSticky] = useState(false);
-
-    // Theo dõi sự kiện cuộn trang
-    useEffect(() => {
-        const handleScroll = () => {
-            const bannerHeight = document.querySelector('header').offsetHeight; // Lấy chiều cao của banner
-            if (window.scrollY > bannerHeight) {
-                setIsSticky(true); // Khi cuộn qua banner, đặt isSticky thành true
-            } else {
-                setIsSticky(false); // Khi cuộn lên trên banner, đặt isSticky thành false
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll); // Thêm sự kiện lắng nghe cuộn trang
-        return () => {
-            window.removeEventListener('scroll', handleScroll); // Dọn dẹp sự kiện khi component unmount
-        };
-    }, []);
-
     return (
         <div className="">
             {/* NavAdmin (cố định luôn ở trên cùng) */}
@@ -39,22 +19,15 @@ function Header() {
                 <img src={banner.src} alt="banner" className="w-full" />
             </header>
 
-            {/* Placeholder để giữ chỗ cho thanh dataplace và menubar */}
-            {isSticky && (
-                <div className="h-28"> {/* Chiều cao của thanh dataplace và menubar */}
-                    {/* Placeholder này sẽ đẩy nội dung xuống khi thanh cố định xuất hiện */}
-                </div>
-            )}
-
-            {/* Thanh dataplace (cố định khi cuộn qua banner) */}
-            <div className={`w-full ${isSticky ? 'fixed top-0 z-40' : ''}`}>
+            {/* Thanh dataplace (sticky khi cuộn qua banner) */}
+            <div className="sticky top-0 z-40">
                 <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
-                    <Nav dataPlaces={dataPlaces} />
+                    <Nav dataPlaces={[]} />
                 </nav>
             </div>
 
-            {/* Thanh menubar (cố định khi cuộn qua banner) */}
-            <div className={`w-full ${isSticky ? 'fixed top-12 z-30' : ''}`}>
+            {/* Thanh menubar (sticky khi cuộn qua banner) */}
+            <div className="sticky top-12 z-30">
                 <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
                     <MenuBar menuBar={menuBar} />
                 </nav>
