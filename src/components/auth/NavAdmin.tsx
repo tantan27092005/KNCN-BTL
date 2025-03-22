@@ -48,16 +48,18 @@ const NavAdmin = () => {
                     </ul>
                 )}
                 <nav>
-                {nameUser !=='' ? (
+                    {nameUser !== '' ? (
                         <div className="flex justify-end items-center space-x-4">
                             <p className='text-white'>Welcome, {nameUser.name}</p>
-                            <button onClick={handleLogout} className="text-white text-sm">
+                            <button onClick={handleLogout} className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300">
                                 LOG-OUT
                             </button>
                         </div>
                     ) : (
                         <Link href={'/auth'} className="text-white text-sm">
-                            <button>SIGN-IN</button>
+                            <button className="text-white bg-transparent border-none focus:outline-none hover:text-gray-300">
+                                SIGN-IN
+                            </button>
                         </Link>
                     )}
                 </nav>
