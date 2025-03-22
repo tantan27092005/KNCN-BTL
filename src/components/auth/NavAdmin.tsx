@@ -53,7 +53,7 @@ const NavAdmin = () => {
                                 onClick={handleLogout}
                                 className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300 w-fit"
                             >
-                                Đăng xuất
+                                LOG-OUT
                             </button>
                         </div>
                     ) : (
