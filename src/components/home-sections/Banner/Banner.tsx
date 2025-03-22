@@ -20,8 +20,11 @@ function Banner() {
             </div>
 
             {/* Phần banner footer */}
-            <div className="w-full">
+{/*             <div className="w-full">
                 <img src={banner_footer.src} alt="banner" className="w-full my-6 max-lg:my-4 rounded-md" /> {/* Giảm margin */}
+            </div> */}
+            <div className='w-[96%] absolute -bottom-[30%]'>
+                    <BannerSlider images={images} visibleNumber={2}/>
             </div>
         </div>
     );
