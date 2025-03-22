@@ -1,16 +1,15 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { menuBarAdmin } from './data-menu.mocks';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import logo from './assets/logo-short.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../counter/nameUserSlice';
 
 interface INameUser {
-    name?: string
+    name?: string;
 }
 
 const NavAdmin = () => {
@@ -18,14 +17,13 @@ const NavAdmin = () => {
     const nameUser = useSelector((state) => state.nameUser.value);
     const router = useRouter();
     const dispatch = useDispatch();
-   
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         dispatch(logout());
         router.push('/');
     };
-    
 
     return (
         <div className="relative flex justify-end items-center bg-custom-gradient h-10 px-4 padding">
@@ -51,7 +49,10 @@ const NavAdmin = () => {
                     {nameUser !== '' ? (
                         <div className="flex justify-end items-center space-x-4">
                             <p className='text-white'>Welcome, {nameUser.name}</p>
-                            <button onClick={handleLogout} className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300">
+                            <button
+                                onClick={handleLogout}
+                                className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300"
+                            >
                                 LOG-OUT
                             </button>
                         </div>
@@ -67,4 +68,5 @@ const NavAdmin = () => {
         </div>
     );
 };
+
 export default NavAdmin;
