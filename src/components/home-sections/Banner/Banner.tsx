@@ -1,6 +1,6 @@
 import { bannerContent, images } from '../data-mock';
 import BannerContent from './BannerContent';
-//import BannerSlider from '@/components/BannerSlider';
+import BannerSlider from '@/components/BannerSlider';
 import banner_footer from '../assets/banner-footer.png';
 import banner_big from '../assets/banner-big.png';
 
