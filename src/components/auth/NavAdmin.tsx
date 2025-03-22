@@ -26,11 +26,14 @@ const NavAdmin = () => {
     };
 
     return (
-        <div className="relative flex justify-end items-center h-10 px-4 padding">
+        <div className="relative flex justify-end items-center h-10 px-4">
             <div className="flex items-center space-x-4">
+                {/* Nút user icon */}
                 <button onClick={() => setMenuBarVisible(!menuBarVisible)}>
                     <FontAwesomeIcon icon={faUser} className="h-5 text-gray-300" />
                 </button>
+
+                {/* Dropdown menu */}
                 {menuBarVisible && (
                     <ul className="absolute left-0 w-[95%] bg-slate-50 p-4 rounded-lg shadow-lg top-[100px] text-sm text-gray-700 dark:text-gray-400">
                         {menuBarAdmin.map((menu) => (
@@ -45,10 +48,12 @@ const NavAdmin = () => {
                         ))}
                     </ul>
                 )}
+
+                {/* Phần đăng nhập/đăng xuất */}
                 <nav className="flex items-center space-x-4">
                     {nameUser !== '' ? (
                         <>
-                            <p className='text-white'>Welcome, {nameUser.name}</p>
+                            <p className="text-white">Welcome, {nameUser.name}</p>
                             <button
                                 onClick={handleLogout}
                                 className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300"
