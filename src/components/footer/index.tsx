@@ -56,8 +56,8 @@ function Footer() {
 
                 {/* Phần bản quyền */}
                 <div className="mt-8 text-center text-sm text-gray-500">
-                    <p>© 2023 Công ty Cổ phần Thế Giới Di Động. GPDKKD: 0303217354 do sở KH & ĐT TP.HCM cấp ngày 02/01/2007.</p>
-                    <p>Địa chỉ: 128 Trần Quang Khải, P. Tân Định, Q.1, TP.Hồ Chí Minh. Điện thoại: 028 38125960. Email: cskh@thegioididong.com.</p>
+                    <p>© 2025 Công ty Cổ phần Điện máy Bách khoa. GPDKKD: 0123456789 do sở KH & ĐT TP.HCM cấp ngày 01/01/2025.</p>
+                    <p>Địa chỉ: 268 Đ. Lý Thường Kiệt, Phường 14, Quận 10, Hồ Chí Minh. Điện thoại: 028 3864 7256. Email: cskh@dienmaybachkhoa.com.</p>
                 </div>
             </div>
         </footer>
