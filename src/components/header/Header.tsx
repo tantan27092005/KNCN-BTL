@@ -3,7 +3,7 @@ import { menuBar } from './data.mocks';
 import Nav from './Nav';
 import MenuBar from './MenuBar';
 import banner from './assets/banner.png';
-import NavAdmin from '../auth/NavAdmin';
+//import NavAdmin from '../auth/NavAdmin';
 import { useState } from 'react';
 import LoginButton from './LoginButton'; // Import component LoginButton
 
@@ -12,9 +12,9 @@ function Header() {
 
     return (
         <div className="">
-            <div className='max-xl:hidden'>
+{/*             <div className='max-xl:hidden'>
                 <NavAdmin />
-            </div>
+            </div> */}
             <header className="w-full">
                 <img src={banner.src} alt="banner" className="w-full" />
             </header>
