@@ -53,13 +53,13 @@ const NavAdmin = () => {
                                 onClick={handleLogout}
                                 className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300 w-fit"
                             >
-                                LOG-OUT
+                                Đăng xuất
                             </button>
                         </div>
                     ) : (
                         <Link href={'/auth'} className="text-white text-sm">
                             <button className="text-white bg-transparent border-none focus:outline-none hover:text-gray-300 w-fit">
-                                SIGN-IN
+                                Đăng nhập
                             </button>
                         </Link>
                     )}
