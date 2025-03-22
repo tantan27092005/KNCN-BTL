@@ -39,6 +39,13 @@ function Header() {
                 <img src={banner.src} alt="banner" className="w-full" />
             </header>
 
+            {/* Placeholder để giữ chỗ cho thanh dataplace và menubar */}
+            {isSticky && (
+                <div className="h-28"> {/* Chiều cao của thanh dataplace và menubar */}
+                    {/* Placeholder này sẽ đẩy nội dung xuống khi thanh cố định xuất hiện */}
+                </div>
+            )}
+
             {/* Thanh dataplace (cố định khi cuộn qua banner) */}
             <div className={`w-full ${isSticky ? 'fixed top-0 z-40' : ''}`}>
                 <nav className="padding bg-[#2A83E9] w-full max-xl:bg-transparent">
