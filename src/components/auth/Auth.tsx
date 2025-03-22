@@ -19,7 +19,7 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
         e.preventDefault();
         // Logic đăng nhập test local
         const testUser = {
-            name: 'Người dùng Test',
+            name: 'Tester',
             email: formData.email,
             token: 'fake-token-for-testing',
         };
