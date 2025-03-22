@@ -26,7 +26,7 @@ const NavAdmin = () => {
     };
 
     return (
-        <div className="relative flex justify-end items-center bg-custom-gradient h-10 px-4 padding">
+        <div className="relative flex justify-end items-center h-10 px-4 padding">
             <div className="flex items-center space-x-4">
                 <button onClick={() => setMenuBarVisible(!menuBarVisible)}>
                     <FontAwesomeIcon icon={faUser} className="h-5 text-gray-300" />
