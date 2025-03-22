@@ -5,14 +5,32 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { signin } from '../counter/nameUserSlice';
 
 const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) => {
     const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
+    const dispatch = useDispatch();
 
     const handleShowPassword = () => setShowPassword((prev) => !prev);
 
+    const handleTestLogin = async (e) => {
+        e.preventDefault();
+        // Logic đăng nhập test local
+        const testUser = {
+            name: 'Người dùng Test',
+            email: formData.email,
+            token: 'fake-token-for-testing',
+        };
+        localStorage.setItem('token', testUser.token);
+        localStorage.setItem('user', JSON.stringify(testUser));
+        dispatch(signin({ name: testUser.name }));
+        router.push('/'); // Chuyển hướng về trang chủ sau khi đăng nhập
+    };
+
     return (
-        <div className="text-md font-medium text-gray-900 space-y-4 shadow-lg bg-white py-8 px-6 rounded-lg w-full max-w-md mx-auto">
+        <div className="text-md font-medium text-gray-900 space-y-4 bg-white py-8 px-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
             {/* Phần tiêu đề */}
             <div className="text-center">
                 <FontAwesomeIcon icon={faLock} className="text-blue-500 text-4xl mb-4" /> {/* Icon màu xanh */}
@@ -25,7 +43,7 @@ const Auth = ({ formData, handleChange, handleSubmit, isSignup, switchMode }) =>
             </div>
 
             {/* Form đăng nhập/đăng ký */}
-            <form onSubmit={handleSubmit} className="space-y-4 mt-6">
+            <form onSubmit={handleTestLogin} className="space-y-4 mt-6">
                 {isSignup && (
                     <>
                         <Input
