@@ -52,7 +52,7 @@ function Nav() {
                 </li>
                 <li className="text-white h-12 px-2 center max-xl:hidden">
                     <a>
-                        //Tài khoản &<br /> Đơn hàng
+{/*                         //Tài khoản &<br /> Đơn hàng */}
                         <NavAdmin />
                     </a>
                 </li>
