@@ -53,7 +53,7 @@ const NavAdmin = () => {
                 <nav className="flex flex-col items-end">
                     {nameUser !== '' ? (
                         <>
-                            <p className="text-white">Welcome, {nameUser.name}</p>
+                            <p className="text-white">Xin chào {nameUser.name}</p>
                             <button
                                 onClick={handleLogout}
                                 className="text-white text-sm bg-transparent border-none focus:outline-none hover:text-gray-300"
