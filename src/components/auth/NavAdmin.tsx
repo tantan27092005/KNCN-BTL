@@ -50,7 +50,7 @@ const NavAdmin = () => {
                 )}
 
                 {/* Phần đăng nhập/đăng xuất */}
-                <nav className="flex items-center space-x-4">
+                <nav className="flex flex-col items-end">
                     {nameUser !== '' ? (
                         <>
                             <p className="text-white">Welcome, {nameUser.name}</p>
