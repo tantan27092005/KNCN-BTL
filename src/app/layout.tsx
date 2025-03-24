@@ -1,14 +1,13 @@
-
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
+
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/counter/providers';
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer';
-
+import Chatbot from '@/components/Chatbot';
 
 export const metadata: Metadata = {
     title: 'Website TGDD',
@@ -22,10 +21,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body>
+            <body className="flex flex-col items-center">
                 <Providers>
-                 <Header />
-                    {children}
+                    <Header />
+                    <div className="flex justify-center w-full max-w-[1440px] px-4">
+                        <main className="flex-1 max-w-[1200px] w-full">{children}</main>
+                    </div>
+                    <Chatbot className="fixed bottom-4 right-4" />
                     <Footer />
                 </Providers>
             </body>

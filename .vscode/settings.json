@@ -1,5 +1,8 @@
 {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "css.customData": [".vscode/tailwind.json"]
+    "css.customData": [
+        ".vscode/tailwind.json"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }
